@@ -7,10 +7,17 @@ Este proyecto permite levantar un stack para el análisis big data en contenedor
 1. Ejecuta el fichero ```./preprare.sh [service1, ..., serviceN]```
 2. Ejecuta el fichero ```./launch.sh```
 
+Por ejemplo: para levantar todos los servicios disponibles:
+```
+./prepare.sh zeppelin nifi
+./launch.sh
+```
+
 ## Servicios
 
-- _*Reverse Proxy:*_ Reverse proxy bajo NGINX (Added by default)
+- _*Reverse Proxy:*_ Reverse proxy bajo Nginx
 - _*Zeppelin:*_ Zeppelin notebook. => [http://zeppelin.localhost](http://zeppelin.localhost)
+- _*NIFI:*_ Flujo de datos. => [http://nifi.localhost](http://nifi.localhost)
 
 ### Nginx Reverse Proxy
 
@@ -27,3 +34,12 @@ Para levantar el cuaderno de notas Zeppelin:
 ./launch.sh
 ```
 => [http://zeppelin.localhost](http://zeppelin.localhost)
+
+### NIFI
+
+Para levantar el servicio NIFI:
+```
+./prepare.sh nifi
+./launch.sh
+```
+=> [http://nifi.localhost](http://nifi.localhost)
