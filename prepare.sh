@@ -12,6 +12,10 @@ do
             echo "Adding $service env vars"
             cat "./$service/.env" >> $env
         ;;
+        "nifi")
+            echo "Adding $service env vars"
+            cat "./$service/.env" >> $env
+        ;;
         *)
             echo "Servicio no soportado. Finalizando"
             exit 1
