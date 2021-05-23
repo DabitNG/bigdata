@@ -1,0 +1,16 @@
+version: "3.7"
+
+services: 
+    reverseproxy:
+        volumes:
+            - ./zeppelin/nginx/zeppelin.conf:/etc/nginx/conf.d/zeppelin.conf:ro
+    
+    zeppelin:
+        image: apache/zeppelin:${ZEPPELIN_VERSION}
+        container_name: zeppelin
+        volumes:
+            - ./zeppelin/logs:${ZEPPELIN_LOGS}
+            - ./zeppelin/notebook:${ZEPPELIN_NOTEBOOKS}
+        environment: 
+            - ZEPPELIN_LOG_DIR=${ZEPPELIN_LOGS}
+            - ZEPPELIN_NOTEBOOK_DIR=${ZEPPELIN_NOTEBOOKS}
