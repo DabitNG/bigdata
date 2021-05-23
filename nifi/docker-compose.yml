@@ -1,0 +1,10 @@
+version: "3.7"
+
+services: 
+    reverseproxy:
+        volumes:
+            - ./nifi/nginx/nifi.conf:/etc/nginx/conf.d/nifi.conf:ro
+
+    nifi:
+        container_name: nifi
+        image: apache/nifi:${NIFI_VERSION}
