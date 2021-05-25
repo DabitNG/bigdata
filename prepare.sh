@@ -1,7 +1,9 @@
 # This script generates docker compose stack file with passed as arguments as working services and launches them
 # Common vars
 dest="./.env"
-backup="./.env.backup"
+
+dc_bckp="./docker-compose.yml"
+dcs_bckp="./docker-compose.stack.yml"
 
 # Log function
 log() {
@@ -16,11 +18,15 @@ logAndExe() {
 }
 
 # Move previous .env file if exists
-logAndExe "mv $dest $backup"
+logAndExe "mv $dest $dest.backup"
+logAndExe "mv $dc_bckp $dc_bckp.backup"
+logAndExe "mv $dcs_bckp $dcs_bckp.backup"
+
+
 # Generate new .env file from env.template
 logAndExe "cat ./.env.template > $dest"
 
-cmd="docker-compose -f docker-compose.yml"
+cmd="docker-compose -f docker-compose.yml.template"
 services='nifi,zeppelin'
 
 for var in "$@"
