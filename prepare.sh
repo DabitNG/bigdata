@@ -1,8 +1,7 @@
 # This script generates docker compose stack file with passed as arguments as working services and launches them
 # Common vars
+backup="./backup"
 dest="./.env"
-
-dc_bckp="./docker-compose.yml"
 dcs_bckp="./docker-compose.stack.yml"
 
 # Log function
@@ -18,9 +17,10 @@ logAndExe() {
 }
 
 # Move previous .env file if exists
-logAndExe "mv $dest $dest.backup"
-logAndExe "mv $dc_bckp $dc_bckp.backup"
-logAndExe "mv $dcs_bckp $dcs_bckp.backup"
+logAndExe "mkdir backup"
+logAndExe "mv $dest $backup/$dest.backup"
+logAndExe "mv $dc_bckp $backup/$dc_bckp.backup"
+logAndExe "mv $dcs_bckp $backup/$dcs_bckp.backup"
 
 
 # Generate new .env file from env.template
