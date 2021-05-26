@@ -25,7 +25,7 @@ logAndExe "mv $dcs_bckp $backup/$dcs_bckp.backup"
 logAndExe "cat ./.env.template > $dest"
 
 cmd="docker-compose -f docker-compose.yml.template"
-services='nifi,zeppelin'
+services='nifi,zeppelin,spark'
 
 for var in "$@"
 do
