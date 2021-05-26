@@ -15,9 +15,12 @@ Por ejemplo: para levantar todos los servicios disponibles:
 
 ## Servicios
 
-- _*Reverse Proxy:*_ Reverse proxy bajo Nginx
-- _*Zeppelin:*_ Zeppelin notebook. => [http://zeppelin.localhost](http://zeppelin.localhost)
-- _*NIFI:*_ Flujo de datos. => [http://nifi.localhost](http://nifi.localhost)
+- __*Reverse Proxy:*__ Reverse proxy bajo Nginx
+- __*Zeppelin:*__ Zeppelin notebook. => [http://zeppelin.localhost](http://zeppelin.localhost)
+- __*NIFI:*__ Flujo de datos. => [http://nifi.localhost](http://nifi.localhost)
+- __*Spark:*__ Computación cluster:
+  - __*Master:*__ Maestro. [http://spark-master.localhost](http://spark-master.localhost)
+  - __*Worker 1:*__ => Esclavo 1. [http://spark-wk1.localhost](http://spark-wk1.localhost)
 
 ### Nginx Reverse Proxy
 
