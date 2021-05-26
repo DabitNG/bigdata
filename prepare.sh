@@ -44,5 +44,4 @@ done
 # create docker compose stack file
 logAndExe "$cmd config >| docker-compose.stack.yml"
 
-# remove backup
-exit 0
+read -n 1 -s -r -p "Press any key to close"
