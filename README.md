@@ -43,3 +43,13 @@ Para levantar el servicio NIFI:
 ./launch.sh
 ```
 => [http://nifi.localhost](http://nifi.localhost)
+
+### SPARK
+
+Para levantar el servicio Spark:
+```
+./prepare.sh spark
+./launch.sh
+```
+=> [http://spark.localhost](http://spark.localhost)
+=> [http://spark-wk1.localhost](http://spark-wk1.localhost)
