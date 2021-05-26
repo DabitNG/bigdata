@@ -26,7 +26,7 @@ services:
             SPARK_WORKER_WEBUI_PORT: 8081
             SPARK_PUBLIC_DNS: spark-wk1.localhost
         links:
-            - master
+            - spark-master
         volumes:
             - ./spark/conf/wk1:/conf
             - ./spark/data:/tmp/data
