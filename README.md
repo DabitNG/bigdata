@@ -51,5 +51,5 @@ Para levantar el servicio Spark:
 ./prepare.sh spark
 ./launch.sh
 ```
-=> [http://spark.localhost](http://spark.localhost)
+=> [http://spark-master.localhost](http://spark-master.localhost)
 => [http://spark-wk1.localhost](http://spark-wk1.localhost)
