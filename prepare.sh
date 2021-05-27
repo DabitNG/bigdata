@@ -15,6 +15,20 @@ logAndExe() {
     eval "$1"
 }
 
+defineSparkWorkers(){
+    log "# Workers: $1"
+    i=0
+    while [ $i -lt $1 ]
+    do
+        log "Worker #$i"
+        logAndExe "cat ./spark/nginx/spark.conf.template >| ./spark/nginx/spark-wk$i.conf"
+        logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/nginx/spark-wk$i.conf"
+        logAndExe "cat ./spark/worker-compose.yml.template >| ./spark/docker-compose-wk$i.conf"
+        logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/docker-compose-wk$i.conf"
+        i=$[$i+1]
+    done
+}
+
 # Move previous .env file if exists
 logAndExe "mkdir backup"
 logAndExe "mv $dest $backup/$dest.backup"
@@ -31,7 +45,20 @@ for var in "$@"
 do
     service=${var,,}
     log "Service: $service"
-    if [[ $services == *$service* ]]; then
+
+    if [[ "$service" == *"spark"* ]]; then
+        logAndExe "cat ./spark/.env >> $dest"
+        cmd="$cmd -f ./spark/docker-compose.yml"
+
+        workers=1
+        // TODO implementar lo recibido por parámetro
+        defineSparkWorkers "$workers"
+        while [ $i -lt $workers ]
+        do
+            cmd="$cmd -f ./spark/docker-compose-wk$i.yml"
+            i=$[$i+1]
+        done
+    elif [[ $service == *$services* ]]; then
         logAndExe "cat ./$service/.env >> $dest"
         cmd="$cmd -f $service/docker-compose.yml"
     else
