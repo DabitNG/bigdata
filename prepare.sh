@@ -51,7 +51,7 @@ do
         cmd="$cmd -f ./spark/docker-compose.yml"
 
         workers=1
-        // TODO implementar lo recibido por parámetro
+        # TODO implementar lo recibido por parámetro
         defineSparkWorkers "$workers"
         while [ $i -lt $workers ]
         do
