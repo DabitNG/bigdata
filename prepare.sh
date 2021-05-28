@@ -6,7 +6,7 @@ dcs_bckp="docker-compose.stack.yml"
 
 # Log function
 log() {
-    echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1"
+    echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1" >> out.log
 }
 
 # Log and execute string argument as command
@@ -23,8 +23,8 @@ defineSparkWorkers(){
         log "Worker #$i"
         logAndExe "cat ./spark/nginx/spark.conf.template >| ./spark/nginx/spark-wk$i.conf"
         logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/nginx/spark-wk$i.conf"
-        logAndExe "cat ./spark/worker-compose.yml.template >| ./spark/docker-compose-wk$i.conf"
-        logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/docker-compose-wk$i.conf"
+        logAndExe "cat ./spark/worker.yml.template >| ./spark/docker-compose-wk$i.yml"
+        logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/docker-compose-wk$i.yml"
         i=$[$i+1]
     done
 }
@@ -51,7 +51,12 @@ do
         cmd="$cmd -f ./spark/docker-compose.yml"
 
         workers=1
-        # TODO implementar lo recibido por parámetro
+        if [[ "$service" == *"="* ]]; then
+            read workers <<<${service//[^0-9]/ }
+        fi
+        if [[ $workers == 0 ]]; then
+            workders=1
+        fi
         defineSparkWorkers "$workers"
         while [ $i -lt $workers ]
         do
