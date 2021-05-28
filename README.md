@@ -31,12 +31,30 @@ Para ello, ejecutamos: ```./prepare.sh``` y ```./launch.sh```
 
 ### Zeppelin
 
-Para levantar el cuaderno de notas Zeppelin:
+Para levantar el cuaderno de notas Zeppelin, el método más simple es:
 ```
 ./prepare.sh zeppelin
 ./launch.sh
 ```
 => [http://zeppelin.localhost](http://zeppelin.localhost)
+
+Esta opción, levanta por defecto el servicio y un contexto spark en local, utilizando un solo núcleo.
+Si desea levantar el contexto local de spark en zeppelin con capacidad de uso de todos los núcleos, use la opción:
+Para levantar el cuaderno de notas Zeppelin, el método más simple es:
+```
+./prepare.sh zeppelin=local[*]
+./launch.sh
+```
+=> [http://zeppelin.localhost](http://zeppelin.localhost)
+Por el momento, no hay posibilidad de indicar el número de núcleos a usar. Es 1 o todos los disponibles en local.
+
+Por último, puede levantar zeppelin junto con un cluster spark, para ello utilice la opción:
+```
+./prepare.sh zeppelin=spark spark[=workers]
+./launch.sh
+```
+=> [http://zeppelin.localhost](http://zeppelin.localhost)
+Este comando desplegará el cluster spark definido según las reglas del apartado "Spark", y Zeppelin conectado a dicho clúster, por lo que podrá lanzar trabajos contra este clúster.
 
 ### NIFI
 
