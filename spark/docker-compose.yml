@@ -2,8 +2,9 @@ version: "3.7"
 
 services: 
     reverseproxy:
+        image: nginx:${REVERSE_PROXY_VERSION}
         volumes:
-            - ./spark/nginx/spark.conf:/etc/nginx/conf.d/spark.conf:ro
+            - ./nginx/spark.conf:/etc/nginx/conf.d/spark.conf:ro
     
     spark-master:
         image: gettyimages/spark
@@ -15,5 +16,5 @@ services:
             SPARK_CONF_DIR: /conf
             SPARK_PUBLIC_DNS: spark-master.localhost
         volumes:
-            - ./spark/conf/master:/conf
-            - ./spark/data:/tmp/data
+            - ./conf/master:/conf
+            - ./data:/tmp/data

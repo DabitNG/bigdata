@@ -3,7 +3,7 @@ version: "3.7"
 services: 
     reverseproxy:
         volumes:
-            - ./spark/nginx/spark-worker.conf:/etc/nginx/conf.d/spark-worker.conf:ro
+            - ./nginx/spark-worker.conf:/etc/nginx/conf.d/spark-worker.conf:ro
     spark-worker:
         image: gettyimages/spark
         command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
@@ -19,5 +19,5 @@ services:
         links:
             - spark-master
         volumes:
-            - ./spark/conf/worker:/conf
-            - ./spark/data:/tmp/data
+            - ./conf/worker:/conf
+            - ./data:/tmp/data
