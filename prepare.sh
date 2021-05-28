@@ -25,7 +25,7 @@ defineSparkWorkers(){
         logAndExe "cat ./spark/nginx/spark.conf.template >| ./spark/nginx/spark-wk$i.conf"
         logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/nginx/spark-wk$i.conf"
         logAndExe "cat ./spark/worker.yml.template >| ./spark/docker-compose-wk$i.yml"
-        logAndExe "sed -i -e 's/worker/wk$i/g' ./spark/docker-compose-wk$i.yml"
+        logAndExe "sed -i -e 's/-worker/-wk$i/g' ./spark/docker-compose-wk$i.yml"
         i=$[$i+1]
     done
 }
