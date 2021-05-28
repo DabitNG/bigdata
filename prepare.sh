@@ -47,19 +47,23 @@ do
     service=${var,,}
     log "Service: $service"
 
-    if [[ "$service" == *"spark"* ]]; then
+    if [[ "$service" == *"spark"* ]]; then          # Spark service request
         logAndExe "cat ./spark/.env >> $dest"
-        cmd="$cmd -f ./spark/docker-compose.yml"
+        cmd="$cmd -f ./spark/docker-compose.yml"    # Spark base added to command
 
-        workers=1
-        if [[ "$service" == *"="* ]]; then
+        workers=1                                   # default worker nodes
+        
+        if [[ "$service" == *"="* ]]; then          # Get worker nodes
             read workers <<<${service//[^0-9]/ }
         fi
-        if [[ $workers == 0 ]]; then
+
+        if [[ $workers == 0 ]]; then                # Check if no worker
             workders=1
         fi
-        defineSparkWorkers "$workers"
-        while [ $i -lt $workers ]
+
+        defineSparkWorkers "$workers"               # Generate workers conf
+        i=0
+        while [ $i -lt $workers ]                   # Foreach worker add compose file to cmd
         do
             cmd="$cmd -f ./spark/docker-compose-wk$i.yml"
             i=$[$i+1]
