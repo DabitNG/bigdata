@@ -6,6 +6,7 @@ dcs_bckp="docker-compose.stack.yml"
 
 # Log function
 log() {
+    echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1"
     echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1" >> out.log
 }
 
