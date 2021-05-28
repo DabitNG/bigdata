@@ -47,7 +47,7 @@ do
     service=${var,,}
     log "Service: $service"
 
-    if [[ "$service" == *"spark"* ]]; then          # Spark service request
+    if [[ "$service" == *"spark="* ]]; then          # Spark service request
         logAndExe "cat ./spark/.env >> $dest"
         workers=1                                   # default worker nodes
         
@@ -82,6 +82,24 @@ do
             logAndExe "rm ./spark/docker-compose-wk$i.yml"
             i=$[$i+1]
         done
+    elif [[ "$service" == *"zeppelin"* ]]; then
+        logAndExe "cp zeppelin/.env.template zeppelin/.env" # Copy env vars
+        target="local"                                      # Default target
+        if [[ "$service" == *"="* ]]; then
+            case $service in                                    # defined target
+                "zeppelin=local[*]")
+                    logAndExe "echo SPARK_MASTER=local[*] >> zeppelin/.env" 
+                ;;
+                "zeppelin=spark")
+                    logAndExe "echo SPARK_MASTER=spark://spark-master:7077 >> zeppelin/.env" 
+                ;;
+                *)
+                    logAndExe "echo SPARK_MASTER=local >> zeppelin/.env" 
+                ;;
+            esac
+        fi
+        logAndExe "cat ./zeppelin/.env >> $dest"
+        cmd="$cmd -f ./zeppelin/docker-compose.yml"        
     elif [[ $service == *$services* ]]; then
         logAndExe "cat ./$service/.env >> $dest"
         cmd="$cmd -f $service/docker-compose.yml"
