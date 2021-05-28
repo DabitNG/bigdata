@@ -2,7 +2,7 @@
 # Log function
 log() {
     echo "$1"
-    echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1" >> out.txt
+    echo "$(date +"%Y-%m-%d %H:%M:%S,%3N") [PREPARE] $1" >> out.log
 }
 
 # Log and execute string argument as command
