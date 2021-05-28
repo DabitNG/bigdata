@@ -49,10 +49,27 @@ Para levantar el servicio NIFI:
 
 ### SPARK
 
-Para levantar el servicio Spark:
+Para levantar el servicio Spark, existen varios métodos, el más simple es:
 ```
 ./prepare.sh spark
 ./launch.sh
 ```
+Esto despliega un cluster con un nodo máster, un nodo worker y un nginx para dar acceso al worker:
 => [http://spark-master.localhost](http://spark-master.localhost)
+=> [http://spark-wk0.localhost](http://spark-wk0.localhost)
+
+Si desea desplegar múltiples nodos workers en el clúster:
+
+```
+./prepare.sh spark[=workers] // where workers is a number of desired workers
+./launch.sh
+```
+Por ejemplo: 
+```
+./prepare.sh spark=3
+./launch.sh
+```
+=> [http://spark-master.localhost](http://spark-master.localhost)
+=> [http://spark-wk0.localhost](http://spark-wk0.localhost)
 => [http://spark-wk1.localhost](http://spark-wk1.localhost)
+=> [http://spark-wk2.localhost](http://spark-wk2.localhost)
