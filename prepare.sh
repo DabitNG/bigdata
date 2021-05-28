@@ -97,6 +97,8 @@ do
                     logAndExe "echo SPARK_MASTER=local >> zeppelin/.env" 
                 ;;
             esac
+        else
+                    logAndExe "echo SPARK_MASTER=local >> zeppelin/.env" 
         fi
         logAndExe "cat ./zeppelin/.env >> $dest"
         cmd="$cmd -f ./zeppelin/docker-compose.yml"        
