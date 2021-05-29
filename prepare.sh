@@ -47,7 +47,7 @@ do
     service=${var,,}
     log "Service: $service"
 
-    if [[ "$service" == *"spark="* ]]; then          # Spark service request
+    if [[ "$service" == *"spark"* ]]; then          # Spark service request
         logAndExe "cat ./spark/.env >> $dest"
         workers=1                                   # default worker nodes
         
@@ -55,7 +55,7 @@ do
             read workers <<<${service//[^0-9]/ }
         fi
 
-        if [[ $workers == 0 ]]; then                # Check if no worker
+        if [[ $workers < 1 ]]; then                # Check if no worker
             workders=1
         fi
 
