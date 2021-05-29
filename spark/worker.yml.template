@@ -11,8 +11,8 @@ services:
         container_name: spark-worker
         environment:
             SPARK_CONF_DIR: /conf
-            SPARK_WORKER_CORES: 2
-            SPARK_WORKER_MEMORY: 1g
+            SPARK_WORKER_CORES: ${SPARK_WORKER_CORES}
+            SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY}
             SPARK_WORKER_PORT: 8881
             SPARK_WORKER_WEBUI_PORT: 8080
             SPARK_PUBLIC_DNS: spark-worker.localhost

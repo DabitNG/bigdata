@@ -12,7 +12,7 @@ services:
         hostname: spark-master
         container_name: spark-master
         environment:
-            MASTER: spark://spark-master:7077
+            MASTER: ${SPARK_MASTER}
             SPARK_CONF_DIR: /conf
             SPARK_PUBLIC_DNS: spark-master.localhost
         volumes:
