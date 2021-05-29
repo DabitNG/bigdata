@@ -14,4 +14,4 @@ services:
         environment: 
             - ZEPPELIN_LOG_DIR=${ZEPPELIN_LOGS}
             - ZEPPELIN_NOTEBOOK_DIR=${ZEPPELIN_NOTEBOOKS}
-            - SPARK_MASTER=${SPARK_MASTER}
+            - SPARK_MASTER=${ZEPPELIN_SPARK_MASTER}
