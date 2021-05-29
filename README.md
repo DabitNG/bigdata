@@ -42,15 +42,18 @@ Esta opción, levanta por defecto el servicio y un contexto spark en local, util
 Si desea levantar el contexto local de spark en zeppelin con capacidad de uso de todos los núcleos, use la opción:
 Para levantar el cuaderno de notas Zeppelin, el método más simple es:
 ```
-./prepare.sh zeppelin=local[*]
+./prepare.sh zeppelin
 ./launch.sh
 ```
 => [http://zeppelin.localhost](http://zeppelin.localhost)
 Por el momento, no hay posibilidad de indicar el número de núcleos a usar. Es 1 o todos los disponibles en local.
 
-Por último, puede levantar zeppelin junto con un cluster spark, para ello utilice la opción:
+Por último, puede levantar zeppelin junto con un cluster spark. Simplemente debe modificar la variable ```ZEPPELIN_SPARk_MASTER```, que dispone de las siguientes opciones:
+- local: Utilizará un solo núcleo de los disponibles en la máquina
+- local[*]: Hará uso de todos los núcleos. El asterísco puede ser sustituido por un número para indicar el nº exacto de núcleos de los disponibles.
+A continuación, ejecute los scripts:
 ```
-./prepare.sh zeppelin=spark spark[=workers]
+./prepare.sh zeppelin spark[=workers]
 ./launch.sh
 ```
 => [http://zeppelin.localhost](http://zeppelin.localhost)
