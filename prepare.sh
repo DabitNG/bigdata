@@ -40,7 +40,7 @@ logAndExe "mv $dcs_bckp $backup/$dcs_bckp.backup"
 logAndExe "cat ./.env.template > $dest"
 
 cmd="docker-compose -f docker-compose.yml.template"
-services='nifi,zeppelin,spark'
+services="nifi,zeppelin,spark"
 
 for var in "$@"
 do
@@ -102,7 +102,7 @@ do
         fi
         logAndExe "cat ./zeppelin/.env >> $dest"
         cmd="$cmd -f ./zeppelin/docker-compose.yml"        
-    elif [[ $service == *$services* ]]; then
+    elif [[ "${service#$services}" == "$service" ]]; then
         logAndExe "cat ./$service/.env >> $dest"
         cmd="$cmd -f $service/docker-compose.yml"
     else
